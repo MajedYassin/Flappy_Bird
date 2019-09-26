@@ -1,7 +1,11 @@
 #include <iostream>
 #include <string>
+#include <list>
 
 #include "../header/olcConsoleGameEngine.h"
+
+
+//Second Commit 
 
 class Flappy_Bird : public olcConsoleGameEngine
 {
@@ -18,9 +22,18 @@ private:
 	float fBirdAcceleration = 0.0f;
 	float fGravity = 100.0f;
 
+	//Partitioning screen into sections 
+	float fSectionWidth;
+	std::list<int> ListSection;
 
+	//Variable used to simulate smooth movement of the bird through the level 
+	float fLevelPosition = 0.0f;
+
+protected:
 
 	virtual bool OnUserCreate(){
+		ListSection = { 0, 0, 0, 0 };
+		fSectionWidth = (float)ScreenWidth() / (float)(ListSection.size() - 1);
 		return true;
 	}
 
@@ -41,7 +54,32 @@ private:
 		fBirdVelocity += fBirdAcceleration * fElapsedTime; 
 		fBirdPosition += fBirdVelocity * fElapsedTime;
 
+		fLevelPosition += 10.0f * fElapsedTime;
+
+		if (fLevelPosition > fSectionWidth)
+		{
+			fLevelPosition - fSectionWidth;
+			ListSection.pop_front();
+			int i = rand() % (ScreenHeight() - 20);
+			if (i <= 10) i = 0;
+			ListSection.push_back(i);
+		}
+
 		Fill(0, 0, ScreenWidth(), ScreenHeight(), L' ');
+
+		//Draw Sections 
+
+		int nSection = 0;
+		for (auto s : ListSection)
+		{
+			if (s!= 0)
+			{
+				Fill(nSection * fSectionWidth + 10 - fLevelPosition, ScreenHeight() - s,
+					nSection * fSectionWidth + 15 - fLevelPosition, ScreenHeight(),
+					PIXEL_SOLID, FG_GREEN);
+			}
+			return nSection;
+		}
 
 		//Drwing the Bird 
 		int nBird = (int)(ScreenWidth() / 3.0f);
@@ -66,9 +104,9 @@ private:
 
 int main()
 {
-	Flappy_Bird game;
-	game.ConstructConsole(60, 40, 16, 16);
-	game.Start();
+	Flappy_Bird Game;
+	Game.ConstructConsole(60, 40, 16, 16);
+	Game.Start();
 
 
 
