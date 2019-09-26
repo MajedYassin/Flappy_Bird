@@ -1,1 +1,7 @@
-﻿
+﻿  Maingame.cpp
+C:\Users\Majed\source\repos\Flappy_Bird\src\Maingame.cpp(11,16): warning C4066:  characters beyond first in wide-character constant ignored
+C:\Users\Majed\source\repos\Flappy_Bird\src\Maingame.cpp(51,36): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Majed\source\repos\Flappy_Bird\src\Maingame.cpp(52,36): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Majed\source\repos\Flappy_Bird\src\Maingame.cpp(56,36): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Majed\source\repos\Flappy_Bird\src\Maingame.cpp(57,36): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
+  Flappy_Bird.vcxproj -> C:\Users\Majed\source\repos\Flappy_Bird\bin\Win32\Debug\Flappy_Bird.exe
